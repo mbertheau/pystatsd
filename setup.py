@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='statsd',
-    version='1.0.0',
+    version='1.0.0-momox1',
     description='A simple statsd client.',
     long_description=open('README.rst').read(),
     author='James Socol',

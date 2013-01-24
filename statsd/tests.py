@@ -132,6 +132,19 @@ def test_gauge():
 
 
 @mock.patch.object(random, 'random', lambda: -1)
+def test_duration():
+    sc = _client()
+    sc.duration('foo', 30)
+    _sock_check(sc, 1, 'foo:30|lf')
+
+    sc.duration('foo', 1.2)
+    _sock_check(sc, 2, 'foo:1.2|lf')
+
+    sc.duration('foo', 70, rate=0.5)
+    _sock_check(sc, 3, 'foo:70|lf|@0.5')
+
+
+@mock.patch.object(random, 'random', lambda: -1)
 def test_timing():
     sc = _client()
 

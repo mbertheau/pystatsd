@@ -153,6 +153,32 @@ Set a :ref:`gauge <gauge-type>` value.
    recorded.
 
 
+.. _duration:
+
+``duration``
+=========
+
+::
+
+    StatsClient().duration(stat, value, rate=1)
+
+Set a :ref:`duration <duration-type>` value.
+
+* ``stat``: the name of the duration to set.
+
+* ``value``: the current value of the duration.
+
+* ``rate``: a sample rate, a float between 0 and 1. Will only send data this
+  percentage of the time. The statsd server does *not* take the sample rate
+  into account for durations. Use with care.
+
+.. note::
+
+   Durations were added to the statsd server in commit 56d7781_. If you try to use
+   this method with an older version of the server, the data will not be
+   recorded.
+
+
 .. _flush:
 
 ``flush``

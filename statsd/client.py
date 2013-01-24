@@ -61,6 +61,10 @@ class StatsClient(object):
         """Set a gauge value."""
         self._send(stat, '%s|g' % value, rate)
 
+    def duration(self, stat, value, rate=1):
+        """Set a low frequency timer value."""
+        self._send(stat, '%s|lf' % value, rate)
+
     def flush(self):
         """Flush the stats batching buffer."""
         if (0 < len(self._stats)):

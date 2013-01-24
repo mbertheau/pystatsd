@@ -8,7 +8,7 @@ The statsd_ server supports a number of different data types, and performs
 different aggregation on each of them. The three main types are *counters*,
 *timers*, and *gauges*.
 
-The statsd server collects and aggregates in 30 second intervals before
+The statsd server collects and aggregates in intervals of configurable length before
 flushing to Graphite_. Graphite usually stores the most recent data in 1-minute
 averaged buckets, so when you're looking at a graph, for each stat you are
 typically seing the average value over that minute.

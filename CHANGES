@@ -1,6 +1,12 @@
 Statsd Changelog
 ================
 
+Version 1.0.0-momox1
+--------------------
+
+- Add support for duration metrics.
+
+
 Version 0.5.1
 -------------
 
