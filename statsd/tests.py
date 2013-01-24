@@ -155,6 +155,7 @@ def test_batch():
     sc.incr('bar')
     _sock_check(sc, 1, 'foo:1|c\nbar:1|c')
 
+
 @mock.patch.object(random, 'random', lambda: -1)
 def test_batch_flush():
     sc = _client(None, 10)
@@ -167,6 +168,7 @@ def test_batch_flush():
 
     sc.flush()
     _sock_check(sc, 1, 'foo:1|c\nbar:1|c')
+
 
 def test_prefix():
     sc = _client('foo')
@@ -182,7 +184,7 @@ def _timer_check(cl, count, start, end):
     assert exp.match(value)
 
 
-def test_timer_manager():
+def test_timer_manager_context_manager():
     """StatsClient.timer is a context manager."""
     sc = _client()
 
@@ -192,7 +194,7 @@ def test_timer_manager():
     _timer_check(sc, 1, 'foo', 'ms')
 
 
-def test_timer_manager():
+def test_timer_manager_decorator():
     """StatsClient.timer is a decorator."""
     sc = _client()
 
