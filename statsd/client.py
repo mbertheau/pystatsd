@@ -8,8 +8,8 @@ import time
 class _Timer(object):
     """A context manager/decorator for statsd.timing()."""
 
-    def __init__(self, client, stat, rate=1):
-        self.client = client
+    def __init__(self, metric_method, stat, rate=1):
+        self.metric_method = metric_method
         self.stat = stat
         self.rate = rate
         self.ms = None
@@ -28,7 +28,7 @@ class _Timer(object):
     def __exit__(self, typ, value, tb):
         dt = time.time() - self.start
         self.ms = int(round(1000 * dt))  # Convert to ms.
-        self.client.timing(self.stat, self.ms, self.rate)
+        self.metric_method(self.stat, self.ms, self.rate)
 
 
 class StatsClient(object):
@@ -43,7 +43,10 @@ class StatsClient(object):
         self._stats = []
 
     def timer(self, stat, rate=1):
-        return _Timer(self, stat, rate)
+        return _Timer(self.timing, stat, rate)
+
+    def timer_lf(self, stat, rate=1):
+        return _Timer(self.duration, stat, rate)
 
     def timing(self, stat, delta, rate=1):
         """Send new timing information. `delta` is in milliseconds."""
